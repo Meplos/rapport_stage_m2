@@ -1,40 +1,54 @@
-\documentclass[french]{article}
+\documentclass[12pt]{article}
 
-\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
 \usepackage[T1]{fontenc}
-\usepackage{babel}
-\usepackage{a4}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{assets/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
 
-\usepackage{helvet}
-\fontfamily{helvet}
-
+        
 \title{
-    Mémoire de stage\\
-    \large Cirrusware \\
-    \large Master 2 Informatique
-    }
-\author{
-    Alexandre Erard\\
-    Maitre de stage: Vincent Jaulin
-}
-\date{1 avril 2021 - 30 août 2021}
+    Rapport de stage\\
+    Cirrusware
+}								                        % Title
+\author{Alexandre Erard}								% Author
+\date{\today}											% Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
 
 \begin{document}
-\maketitle
-\begin{center}
-    \textsc{\LARGE Université de Bordeaux}
-\end{center}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{section/title.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{section/0-remerciment.tex}
+\tableofcontents
+\include{section/1-intro.tex}
+\include{section/2-environnement.tex}
+\include{section/3-work.tex}
+\include{section/4-conclusion.tex}  
+
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
-
-
-\include{section/0-remerciment.tex}
-
-\tableofcontents
-
-\include{section/1-intro.tex}
-\include{section/2-formation.tex}
-\include{section/3-cochon.tex}
-\include{section/4-conclusion.tex}
 \end{document}
