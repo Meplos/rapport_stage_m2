@@ -1,3 +1,5 @@
 {
-  "diffEditor.wordWrap": "on"
+  "diffEditor.wordWrap": "on",
+  "latex-workshop.latex.outDir": "./build",
+  "prettier.endOfLine": "lf"
 }

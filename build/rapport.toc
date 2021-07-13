@@ -1,6 +1,8 @@
 \babel@toc {french}{}
-\contentsline {section}{\numberline {1}Remerciment}{2}{}%
-\contentsline {section}{\numberline {2}Introduction}{4}{}%
-\contentsline {section}{\numberline {3}Studio Digitale et formation}{5}{}%
-\contentsline {section}{\numberline {4}Reprise d'un projet CRM pour Interporc et le consortium du jambon de Bayonne}{6}{}%
-\contentsline {section}{\numberline {5}Conclusion}{7}{}%
+\contentsline {section}{\numberline {1}Remerciment}{1}{}%
+\contentsline {section}{\numberline {2}Avant propos}{2}{}%
+\contentsline {section}{\numberline {3}Contexte du stage}{4}{}%
+\contentsline {subsection}{\numberline {3.1}Cirrusware}{4}{}%
+\contentsline {subsection}{\numberline {3.2}La plateforme Send Up}{4}{}%
+\contentsline {section}{\numberline {4}Reprise d'un projet CRM pour Interporc et le consortium du jambon de Bayonne}{5}{}%
+\contentsline {section}{\numberline {5}Conclusion}{6}{}%
