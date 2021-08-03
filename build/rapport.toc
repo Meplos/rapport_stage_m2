@@ -17,5 +17,7 @@
 \contentsline {section}{\numberline {5}Missions r\IeC {\'e}alis\IeC {\'e}es}{10}{}%
 \contentsline {subsection}{\numberline {5.1}Widget pour le studio Digital}{10}{}%
 \contentsline {subsubsection}{\numberline {5.1.1}Serializations des donn\IeC {\'e}es des formulaires}{10}{}%
-\contentsline {section}{\numberline {6}Conclusion}{11}{}%
-\contentsline {section}{\numberline {7}Anexes}{12}{}%
+\contentsline {subsubsection}{\numberline {5.1.2}Compr\IeC {\'e}hension de l'API et impl\IeC {\'e}mentation des requ\IeC {\^e}tes}{11}{}%
+\contentsline {subsubsection}{\numberline {5.1.3}Cr\IeC {\'e}ation des widgets}{11}{}%
+\contentsline {section}{\numberline {6}Conclusion}{12}{}%
+\contentsline {section}{\numberline {7}Anexes}{13}{}%

@@ -14,3 +14,26 @@ Afin de correspondre à ces critères, nous avions besoin de construire un site 
 La première étape réalisé afin de pouvoir réaliser ceci à était d'adapter l'enregistrement des formulaires du studio qui jusque là ne nous permet pas d'effectuer simplement des statistiques. 
 
 \subsubsection{Serializations des données des formulaires}
+
+Afin de récolter les données des formulaire, le studio digital passe par un serializer qui va enregistrer dans un fichier json les valeurs des différents champs associé à leur id. Ce système présente plusieurs avantage comme la facilité et la rapidité d'implémentation. Maleureusement ceci ne nous permet pas de savoir si une réponse est, dans notre cas, correcte ou non. Ou encore pouvoir associé le label d'une question à son résultat. 
+
+Pour atteindre le résultat souhaité j'ai du implémenter un nouveaux widget pour le studio digital en VueJS. Ce widget est un simple bouton de correction qui va devoir récupérer tout le contenu nécéssaire du formulaire et les stocker dans des champs cachés afin de se servir du serializer. Le reste du formulaire étant coder en JQuery/html, la seule solution était donc de parcourir le formulaire et de récupérer les information dans le DOM afin de réccupérer les informations nécéssaire. A savoir les information permettant le calcule de la note, diverses meta-données par rapport au question comme le label, l'id du champ concerné,le résultat obtenu a la question, etc.. 
+
+Dès que ces informations fut récupérer il ne rester plus qu'a établir les différentes requêtes nécéssaire à la récupération des données en fonction du périmetre défini (formé, entreprise, admin)
+
+
+\subsubsection{Compréhension de l'API et implémentation des requêtes}
+
+Dans l'actuel implémentation du serveur Send-Up, la partie gérent les \textit{Recordset} - Table MySQL comportant un champ info destiné à stocker du JSON - n'est pas une "API REST". Les routes pointant vers cette partie sont générer automatiquement à partire du nom de la méthode défini dans le controlleur.Exemple la méthode postRecordset est appelée lors d'une requête POST sur /Recordset. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} était accepter pour la requête existante.
+Une fois le fonctionnment compris il suffisait d'implémenter une requête à la base de donées prenant en compte la portée dans laquel on se trouvé afin de renvoier uniquement les donées nécéssaire.
+
+\subsubsection{Création des widgets}
+
+Une fois les données récupérer et les requêtes créer il fallait que je créer 5 widgets différents qui permeté de: 
+\begin{itemize}
+    \item visualiser les résultats d'une personnes formée pour chaque tentatives. 
+    \item  visualiser les réponses avec correction d'une personne formée.
+    \item afficher les statistiques globale de la formations c'est a dire le nombre de bonne réponse par rapport au nombre de personne.
+    \item afficher les statisques globale pour le formulaire de satisfaction client. 
+    \item afficher les réponses d'une personnes formé au questionnaires de satisfaction.  
+\end{itemize}
