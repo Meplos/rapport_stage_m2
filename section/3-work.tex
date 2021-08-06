@@ -37,3 +37,6 @@ Une fois les données récupérer et les requêtes créer il fallait que je cré
     \item afficher les statisques globale pour le formulaire de satisfaction client. 
     \item afficher les réponses d'une personnes formé au questionnaires de satisfaction.  
 \end{itemize}
+
+Après avoir développer certains d'entre eux, il s'avèra que certains traitement se répeter ou se resembler fortement. Or VueJS integre ce qui appèle les \textit{Mixins}, ces éléments possède les mêmes caractéristique dans leur balise script qu'un composant vueJS classique. Mais ce dernier à la possibilité d'être intégré à l'intérieurs de composant (ou autre Mixins). Chaque composant hérite donc des donnés, méthodes et autres propriétés calculé. Ceci empêche donc la redondance et facilite la maintenabilité.
+C'est donc pour cela, que j'ai créer un mixins spéciale afin de facilité la lisibilité et la maintenance du code. 
