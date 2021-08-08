@@ -2,8 +2,8 @@
 
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
-\usepackage{minted}
-
+% \usepackage{minted}
+\usepackage[nottoc]{tocbibind}
 \usepackage{url}
 \usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
@@ -52,5 +52,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-
+\bibliographystyle{unsrt}
+\bibliography{sample}
+\nocite{*}
 \end{document}

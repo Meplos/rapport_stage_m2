@@ -75,17 +75,35 @@ De plus il intègre un \textit{collection runner} qui permet d'agencer l'ordre d
 Historiquement la platforme Send-Up à était developé sur une stack Symphony 2.8/Jquery/Bootstrap. Aujourd'hui l'entreprise est en pleine transition technologique. Son objectif est de se passer de Jquery et Bootstrap au profit des nouvelles technologies du web et plus particulièrement du framework VueJS. Cette transition reste un défi pour l'entreprise car certains outils du site comme le \textit{studio digital} doivent garder ce relicat afin de garder une rétro-compatibilité mais aussi afin de facilité son usage auprés des clients. Voyons plus en détails les technologies choisies par l'entreprise à savoir Symfony et VueJS.
 
 \subsubsection{Symfony}
-Symfony est un framework PHP français développée en 2005 par Fabien Potencier. Basé sur le pattern Modèle-Vue-Controller, il est actuellement en version 5.x.x  Le gros avantage de Symfony sur les autres framework php du même type comme Laravel, ou CakePHP est sa documentation qui en plus d'être riches et également traduite en français. De plus, il possède une communauté trés importante et réactive. En effet a ce jour il existe plus de $X$ bundle sur la version 2.8. Et énormement de réponses sur les forums de developpeur.
+Symfony est un framework PHP français développée en 2005 par Fabien Potencier. Basé sur le pattern Modèle-Vue-Controller (MVC), il est actuellement en version 5.x.x  Le gros avantage de Symfony sur les autres framework php du même type comme Laravel, ou CakePHP est sa documentation qui en plus d'être riches et également traduite en français. De plus, il possède une communauté trés importante et réactive. En effet a ce jour il existe plus de $X$ bundle sur la version 2.8. Et énormement de réponses sur les forums de developpeur. Il intègre également des outils qui sont extrement pratique dans la gestion des données comme par exemple \textbf{Doctrine} un ORM (Object Relation Manager).
+
+Un ORM permet de facilement gérer les données en transformant directement les résultats des requêtes en Entité php. Il intègre également un langage d'intérogation de la base de données nommé DQL. Ce langage rend plus permet de rendre plus lisible les requêtes et l'intégration de variable dans celle-ci. D'autre outils sont également présent comme l'injecteur de dépendance ou encore les outils de débbug disponnible en environement de developement.  
 
 
 \subsubsection{VueJS}
 Pour remplacer la partie Jquery de Send-Up le framework VueJs a était choisi par l'équipe. Il s'agit d'un framework open-source développer à l'origine par Evan You en 2013. Ce framework facilite la création d'interface graphique et de Single Page Application (SPA). Pour présenter rapidement le framework voici un exemple de composant basique. 
 
+\begin{figure}[htbp]
+    \center
+    \includegraphics[width=0.8\textwidth]{vue.png}
+    \caption{Exemple de composant VueJS}
+\end{figure}
 
 Un fichier .vue est composé de 3 élements principaux.
 \begin{itemize}
     \item \textbf{template} : contient le code HTML de l'interface graphique.
     \item \textbf{script} : contient la logique et le comportement du composant. 
-    \item \textbf{styles} : contient les styles CSS du composant. Le style peux être utilisé avec une props \textit{scoped} afin de limiter les styles à l'intérieur du composant.
+    \item \textbf{style} : contient les styles CSS du composant. Le style peux être utilisé avec une props \textit{scoped} afin de limiter les styles à l'intérieur du composant.
 \end{itemize}
+
+La balise script est l'endroit ou on va déclarer le composant et tout ce dont il a besoin pour fonctionner. On y retrouve donc les sous composant qu'il utilise dans sont rendu, les paramètres (appelé \textit{props})que son parent peut lui passer. On retrouve également l'état du composant avec toutes les données utilisé, les methods qui vont déterminer la logique, les propriété calculé du composant.
+De plus le framework possède une catégorie d'objet nommé \textit{Mixins} dont on parelera plus en détails plus tard.
+
+On y retrouve également les divers évenement du cycle de vie auquelle on  peut se brancher pour éffectuer certains traitement spécifique. Voici le schema du cyle ce vie d'un composant.  
+
+\begin{figure}[htbp]
+    \center
+    \includegraphics[width=0.5\textwidth]{vue_cycle.png}
+    \caption{Schéma du cycle de vie d'un composant VueJS}
+\end{figure}
 
