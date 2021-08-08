@@ -96,14 +96,17 @@ Un fichier .vue est composé de 3 élements principaux.
     \item \textbf{style} : contient les styles CSS du composant. Le style peux être utilisé avec une props \textit{scoped} afin de limiter les styles à l'intérieur du composant.
 \end{itemize}
 
-La balise script est l'endroit ou on va déclarer le composant et tout ce dont il a besoin pour fonctionner. On y retrouve donc les sous composant qu'il utilise dans sont rendu, les paramètres (appelé \textit{props})que son parent peut lui passer. On retrouve également l'état du composant avec toutes les données utilisé, les methods qui vont déterminer la logique, les propriété calculé du composant.
+La balise script est l'endroit ou on va déclarer le composant et tout ce dont il a besoin pour fonctionner. On y retrouve donc les sous composant qu'il utilise dans sont rendu, les paramètres (appelé \textit{props}) que son parent peut lui passer, ici on attend un paramètres \textit{msg} de type \textit{String}. On retrouve également l'état du composant avec toutes les données utilisé,un compteur et la chaine de caractère \textit{hello}, les methodes qui vont déterminer la logique, les propriété calculé du composant. Les propriété calculé sont appalable comme les variables indiqué dans data. Mais ne sont calculé qu'une seule fois à la création du composant puis lors de la modification de variable utilisé à l'interieur. 
 De plus le framework possède une catégorie d'objet nommé \textit{Mixins} dont on parelera plus en détails plus tard.
 
-On y retrouve également les divers évenement du cycle de vie auquelle on  peut se brancher pour éffectuer certains traitement spécifique. Voici le schema du cyle ce vie d'un composant.  
-
+Voici le rendu de ce composant appeler avec $msg = Friends$ :
 \begin{figure}[htbp]
     \center
-    \includegraphics[width=0.5\textwidth]{vue_cycle.png}
-    \caption{Schéma du cycle de vie d'un composant VueJS}
+    \includegraphics[width=0.8\textwidth]{vue_ui.png}
+    \caption{Exemple de composant}
+    
 \end{figure}
+
+On y retrouve également les divers évenement du cycle de vie auquelle on  peut se brancher pour éffectuer certains traitement spécifique. Voici le schema du cyle ce vie d'un composant, pour plus de détails voir l'annexes \ref{fig:vue_cycle}
+
 
