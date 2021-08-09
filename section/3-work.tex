@@ -24,7 +24,7 @@ Dès que ces informations fut récupérer il ne rester plus qu'a établir les di
 
 \subsubsection{Compréhension de l'API et implémentation des requêtes}
 
-Dans l'actuel implémentation du serveur Send-Up, la partie gérent les \textit{Recordset} - Table MySQL comportant un champ info destiné à stocker du JSON - n'est pas une "API REST". Les routes pointant vers cette partie sont générer automatiquement à partire du nom de la méthode défini dans le controlleur.Exemple la méthode postRecordset est appelée lors d'une requête POST sur /Recordset. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} était accepter pour la requête existante.
+Dans l'actuel implémentation du serveur Send-Up, la partie gérent les \textit{Recordset} - Table MySQL comportant un champ info destiné à stocker du JSON - est gérer par une partie de l'API dont les routes pointant vers cette partie sont générer automatiquement à partire du nom de la méthode défini dans le controlleur.Exemple la méthode postRecordset est appelée lors d'une requête POST sur /Recordset. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} était accepter pour la requête existante.
 Une fois le fonctionnment compris il suffisait d'implémenter une requête à la base de donées prenant en compte la portée dans laquel on se trouvé afin de renvoier uniquement les donées nécéssaire.
 
 \subsubsection{Création des widgets}
@@ -40,3 +40,8 @@ Une fois les données récupérer et les requêtes créer il fallait que je cré
 
 Après avoir développer certains d'entre eux, il s'avèra que certains traitement se répeter ou se resembler fortement. Or VueJS integre ce qui appèle les \textit{Mixins}, ces éléments possède les mêmes caractéristique dans leur balise script qu'un composant vueJS classique. Mais ce dernier à la possibilité d'être intégré à l'intérieurs de composant (ou autre Mixins). Chaque composant hérite donc des donnés, méthodes et autres propriétés calculé. Ceci empêche donc la redondance et facilite la maintenabilité.
 C'est donc pour cela, que j'ai créer un mixins spéciale afin de facilité la lisibilité et la maintenance du code. 
+
+
+\subsection{Reprise d'un projet XRM}
+Suite au départ d'un développeur de l'équipe. On m'a placer sur la reprise de son projet qui consite a creer un XRM permetant tous les points de contrôle concernant le \textit{Consortium du Jambon de Bayonne} et \textit{Interporc Franche-Compté}.
+Un XRM 
