@@ -44,4 +44,32 @@ C'est donc pour cela, que j'ai créer un mixins spéciale afin de facilité la l
 
 \subsection{Reprise d'un projet XRM}
 Suite au départ d'un développeur de l'équipe. On m'a placer sur la reprise de son projet qui consite a creer un XRM permetant tous les points de contrôle concernant le \textit{Consortium du Jambon de Bayonne} et \textit{Interporc Franche-Compté}.
-Un XRM 
+Un XRM est un logiciel de gestion des relations tiers. C'est à dire des clients, fournisseur, revendeur etc... En plus de réaliser ceci le notre doit permettre de pouvoir de créer et de réaliser des audits, en fonction du type d'activité et du cahier des charges de la personne audité, et de pouvoir saisir les données issue d'analyse laboratoire.
+
+Toute la partie audit a était réaliser par mon prédécésseur, il me reste donc à implémenter la parite Analyse et prélévement. 
+
+\subsubsection{Fonctionnalités}
+Tout d'abord passons en revus les fonctionalités souhaité par les clients. Ici nous avons 2 client différents avec des besoins différents.
+\begin{itemize}
+    \item En tant que Consortium, je souhaite pouvoir créer des fiches prélevements. En fonction du cahier des charges, type d'activité de la personne audité il est possible d'avoir plusieurs champs différents définis dans un fichier de configuration.
+    \item En tant que Consortium, je souhaite pouvoir ajouter des des analyses à un prélévement. Chaque analyse possède un type dépendant des champs sélectionnés dans la fiche prélévement. Ceci conditionera les champs spécifique de l'analyse
+    \item En tant que qu'Interporc, je souhaite pouvoir créer des fiches analyse. Les champs spécifiques dépendent uniquement du type de produit sélectionner: Saucisse, Lisier, Lactoserum, Sel. 
+    \item En tant qu'Interporc et Consortium, je souhaite pouvoir lever des écarts à chaques analyses si besoin est.  
+    \item En tant qu'Interporc et Consortium, je souhaite pouvoir téléverser les résultats des laboratoires et les associé à une analyse. 
+\end{itemize}
+
+
+
+\subsubsection{Analyse de l'existant}
+
+
+Après avoir discuter avec mon chef des projet, et mon maitre de stage, on a determiner qu'un audit et un prélévement se ressembler énormément. En effet chacun et relier à un auditeur/préleveur, une personne audité, un ou plusieurs cahier des charges et un ou plusieurs type d'activités. 
+
+Pour cela les audits sont stocké dans une table nommé \textit{Recordset\_app}.Cette classe possède un champ info au format JSON, comme la classe \textit{Recordset}  décrit précédement. La grande différence est que cette dernière est gérér par une classe abstraite nommé \textit{AbstractSheet}, qui définis que le champs info possède au minimum un un champ builder, data et files. Chaque entité voulant être stocker dans la table Recorset\_app doit étre hérité de cette classe et donc respecter ce schéma. Pour différencier nos sous classe nous faisont appel une fonction de doctrine appelée le discriminant. Il permet d'associé un entier a une classe. A ce jour nous avons 2 classe héritant de AbstracSheet: 
+\begin{enumerate}
+    \item \textit{Recordset\_app} : qui correspond à toute les fiches standard. 
+    \item \textit{SubscriberAudit}: qui correspond au audit créer par nos subscriber. 
+\end{enumerate}
+
+Voila pour l\'existant au niveaux de l\'api. Voyons maintenant comment à était construit les audit afin de pouvoir garder une cohérence dans l'application et de pouvoir réutiliser au maximum les composants déjà créer. 
+
