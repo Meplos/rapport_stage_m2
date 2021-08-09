@@ -4,3 +4,6 @@
 *.fls
 *.gz
 *.toc
+*.bbl
+
+*.blg
