@@ -1,45 +1,46 @@
 \section{Missions réalisées}
-Au cours de mon stage j'ai pu intervenir sur différents projets allant d'un simple script permettant de dynamiser une page web d'un client à la reprise d'un projet complet. Ici nous allons détailler les deux principales missions de mon stage à savoir le développement de widget en vueJS pour le studio Digital et la finalisation des XRM du \textit{Consortium du Jambon de Bayonne} et d'\textit{Interporc Franche-Compté}.
+Au cours de mon stage, j'ai pu intervenir sur différents projets allant d'un simple script permettant de dynamiser une page web d'un client à la reprise d'un projet complet. Ici nous allons détailler les deux principales missions de mon stage à savoir le développement de widget en vueJS pour le studio Digital et la finalisation des XRM du \textit{Consortium du Jambon de Bayonne} et d'\textit{Interporc Franche-Compté}.
 
 \subsection{Widget pour le studio Digital}
-Lors de mon arrivé dans l'entreprise, celle ci cherchait a valorisé ses formation en devenant Organisme de formation certifié \textbf{QUALIOPI}. QUALIOPI est une certification qui garanti des formations avec: 
+Lors de mon arrivé dans l'entreprise, \textit{CIRRUSWARE} cherchait à valoriser ses formations en devenant Organisme de formation certifié \textbf{QUALIOPI}. QUALIOPI est une certification qui garantie des formations avec: 
 \begin{itemize}
     \item des bons résultats
     \item des adaptations au besoins
     \item des formateurs qualifiés
     \item une bonne prise en compte des retours face au formations
 \end{itemize} 
-Afin de correspondre à ces critères, nous avions besoin de construire un site web qui permettrait d'effectuer les questionnaires des différents modules de la formations, ainsi que le formulaire de satisfaction. Puis par la suite de pouvoir consulter les différentes statistiques des différents modules sous 3 vue différentes, formés, qui doit voir uniquement ses résultats, entreprise qui ne voit que les statistiques de ses employés formés, une visions globale qui permettra de voir toutes les statistiques des personnes formées.
+Afin de correspondre à ces critères, nous avions besoin de construire un site web qui permettrait d'effectuer les questionnaires des différents modules de la formations, ainsi que le formulaire de satisfaction. Puis par la suite de pouvoir consulter les différentes statistiques des différents modules sous 3 vue différentes, formés, qui doit voir uniquement leurs résultats, entreprise qui ne voit que les statistiques de ses employés formés, une vision globale qui permettra de voir toutes les statistiques des personnes formées.
 
-La première étape réalisé afin de pouvoir réaliser ceci à était d'adapter l'enregistrement des formulaires du studio qui jusque là ne nous permet pas d'effectuer simplement des statistiques. 
+La première étape réalisée afin de pouvoir réaliser ceci à était d'adapter l'enregistrement des formulaires du studio qui jusque là ne nous permet pas d'effectuer simplement des statistiques. 
 
 \subsubsection{Serializations des données des formulaires}
 
-Afin de récolter les données des formulaire, le studio digital passe par un serializer qui va enregistrer dans un fichier json les valeurs des différents champs associé à leur id. Ce système présente plusieurs avantage comme la facilité et la rapidité d'implémentation. Maleureusement ceci ne nous permet pas de savoir si une réponse est, dans notre cas, correcte ou non. Ou encore pouvoir associé le label d'une question à son résultat. 
+Afin de récolter les données des formulaire, le studio digital passe par un serializer qui va enregistrer dans un fichier json les valeurs des différents champs associés à leurs id. Ce système présente plusieurs avantage comme la facilité et la rapidité d'implémentation. Maleureusement ceci ne nous permet pas de savoir si une réponse est correcte ou non dans notre cas. Ou encore pouvoir associer le label d'une question à son résultat. 
 
-Pour atteindre le résultat souhaité j'ai du implémenter un nouveaux widget pour le studio digital en VueJS. Ce widget est un simple bouton de correction qui va devoir récupérer tout le contenu nécéssaire du formulaire et les stocker dans des champs cachés afin de se servir du serializer. Le reste du formulaire étant coder en JQuery/html, la seule solution était donc de parcourir le formulaire et de récupérer les information dans le DOM afin de réccupérer les informations nécéssaire. A savoir les information permettant le calcule de la note, diverses meta-données par rapport au question comme le label, l'id du champ concerné,le résultat obtenu a la question, etc.. 
+Pour atteindre le résultat souhaité, j'ai dû implémenter un nouveau widget pour le studio digital en VueJS. Ce widget est un simple bouton de correction qui va devoir récupérer tout le contenu nécessaire du formulaire et de le stocker dans des champs cachés afin de servir le serializer. Le reste du formulaire étant coder en JQuery/html, la seule solution était donc de parcourir le formulaire et de récupérer les information dans le DOM. A savoir les information permettant le calcule de la note, diverses meta-données par rapport au question comme le label, l'id du champ concerné,le résultat obtenu a la question, etc.. 
 
-Dès que ces informations fut récupérer il ne rester plus qu'a établir les différentes requêtes nécéssaire à la récupération des données en fonction du périmetre défini (formé, entreprise, admin)
+Dès que ces informations fut récupérer il ne rester plus qu'a établir les différentes requêtes nécessaire à la récupération des données en fonction du périmètre défini (formé, entreprise, admin)
 
 
 \subsubsection{Compréhension de l'API et implémentation des requêtes}
 
-Dans l'actuel implémentation du serveur Send-Up, la partie gérent les \textit{Recordset} - Table MySQL comportant un champ info destiné à stocker du JSON - est gérer par une partie de l'API dont les routes pointant vers cette partie sont générer automatiquement à partire du nom de la méthode défini dans le controlleur.Exemple la méthode postRecordset est appelée lors d'une requête POST sur /Recordset. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} était accepter pour la requête existante.
-Une fois le fonctionnment compris il suffisait d'implémenter une requête à la base de donées prenant en compte la portée dans laquel on se trouvé afin de renvoier uniquement les donées nécéssaire.
+Dans l'actuel implémentation du serveur Send-Up, la partie gérant les \textit{Recordset} - Table MySQL comportant un champ info destiné à stocker du JSON - est gérer par une partie de l'API dont les routes pointant vers cette partie sont générer automatiquement à partir du nom de la méthode définie dans le controlleur.Exemple la méthode postRecordset est appelée lors d'une requête POST sur /Recordset. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} était accepter pour la requête existante.
+Une requête qui permetter de lister tous les Recordset lié à l'entreprise qui les a créé, Dans notre cas il s'agit de \textit{Send-Up Formation}. Cette requête permet donc de répondre à la demande de vue administrateur. Afin d'avoir une vue "entreprise", on associe chaque utilisateur à  un champs customisé nommé "entreprise" qui correspond au vrai nom de son entreprise. Grâce à cela on à juste a rajouter un paramètre à la requete précédente afin d'avoir une vue réduite sur les données. 
+Pour récuppérer les données d'un seul utilisateur, il nous suffit juste de de filter sur l'id de l'utilisateur.   
 
 \subsubsection{Création des widgets}
 
-Une fois les données récupérer et les requêtes créer il fallait que je créer 5 widgets différents qui permeté de: 
+Une fois les données récupérées et les requêtes créées il fallait que je créais 5 widgets différents qui permettait de: 
 \begin{itemize}
-    \item visualiser les résultats d'une personnes formée pour chaque tentatives. 
+    \item visualiser les résultats d'une personne formée pour chaque tentative. 
     \item  visualiser les réponses avec correction d'une personne formée.
-    \item afficher les statistiques globale de la formations c'est a dire le nombre de bonne réponse par rapport au nombre de personne.
-    \item afficher les statisques globale pour le formulaire de satisfaction client. 
-    \item afficher les réponses d'une personnes formé au questionnaires de satisfaction.  
+    \item afficher les statistiques globales de la formation c'est a dire le nombre de bonne réponse par rapport au nombre de personnes.
+    \item afficher les statisques globales pour le formulaire de satisfaction client. 
+    \item afficher les réponses d'une personne formé au questionnaire de satisfaction.  
 \end{itemize}
 
-Après avoir développer certains d'entre eux, il s'avèra que certains traitement se répeter ou se resembler fortement. Or VueJS integre ce qui appèle les \textit{Mixins}, ces éléments possède les mêmes caractéristique dans leur balise script qu'un composant vueJS classique. Mais ce dernier à la possibilité d'être intégré à l'intérieurs de composant (ou autre Mixins). Chaque composant hérite donc des donnés, méthodes et autres propriétés calculé. Ceci empêche donc la redondance et facilite la maintenabilité.
-C'est donc pour cela, que j'ai créer un mixins spéciale afin de facilité la lisibilité et la maintenance du code. 
+Après avoir développer certains d'entre eux, il s'avéra que certains traitements se répéter ou se ressembler fortement. Or VueJS intègre des \textit{Mixins}, ces éléments possède les mêmes caractéristique dans leur balise script qu'un composant vueJS classique. Mais ce dernier à la possibilité d'être intégré à l'intérieure de composant (ou autre Mixins). Chaque composant hérite donc des données, méthodes et autres propriétés calculées. Ceci empêche donc la redondance et facilite la maintenabilité.
+C'est donc pour cela, que j'ai créé un mixins spéciale afin de facilité la lisibilité et la maintenance du code. 
 
 
 \subsection{Reprise d'un projet XRM}
