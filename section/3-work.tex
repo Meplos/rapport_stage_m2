@@ -72,5 +72,14 @@ Pour cela les audits sont stocké dans une table nommé \textit{Recordset\_app}.
     \item \textit{SubscriberAudit}: qui correspond au audit créer par nos subscriber. 
 \end{enumerate}
 
-Voila pour l\'existant au niveaux de l\'api. Voyons maintenant comment à était construit les audit afin de pouvoir garder une cohérence dans l'application et de pouvoir réutiliser au maximum les composants déjà créer. 
+Voila pour l\'existant au niveaux de l\'api. Voyons maintenant comment à était construit les audit côtés interface utilisateur afin de pouvoir garder une cohérence dans l'application et de pouvoir réutiliser au maximum les composants déjà créer. 
 
+Premierement commençons par la liste des audits crées. Cette liste comporte 3 composant principaux: 
+\begin{itemize}
+    \item  \textit{AuditSubscriberListGrid}: Les composants suffixer par \textbf{Grid} dans la CRM sont des composant... 
+    % TODO expliquer GridBlock
+    \item \textit{AuditSubscriberList}
+    \item \textit{AuditSubscriberListSimple} qui va intégré le composant data-table de la librairie Vuetify. 
+\end{itemize}
+
+Afin de rendre ces composant les plus réutilisable possible il a utilisé le système de \textbf{slots} de Vue. Un slot permet de réserver une place à un composant ou autre template html qui sera définis dans un composant parent. 
