@@ -78,8 +78,12 @@ Premierement commençons par la liste des audits crées. Cette liste comporte 3 
 \begin{itemize}
     \item  \textit{AuditSubscriberListGrid}: Les composants suffixer par \textbf{Grid} dans la CRM sont des composant... 
     % TODO expliquer GridBlock
-    \item \textit{AuditSubscriberList}
+    \item \textit{AuditSubscriberList} : qui va récupérer les données du serveur et les passer au composant enfant avec les en-têtes du tablaux souhaité.  
     \item \textit{AuditSubscriberListSimple} qui va intégré le composant data-table de la librairie Vuetify. 
 \end{itemize}
 
-Afin de rendre ces composant les plus réutilisable possible il a utilisé le système de \textbf{slots} de Vue. Un slot permet de réserver une place à un composant ou autre template html qui sera définis dans un composant parent. 
+Afin de rendre ces composants les plus réutilisable possible il a utilisé le système de \textbf{slots}\cite{vueslots} de Vue. Un slot permet de réserver une place à un composant ou autre template html qui sera injecter depuis un composant parent. Un composant parent peu lui même définir qu'un slot enfant comprend un autre slot. Ainsi Cela permet une total personalisation et donc une réutilisation total du composant. 
+
+Les clients souhaitaient pouvoir créer des écarts lorsqu'une analyse est non conforme.
+Un écarts est une sorte de ticket qui explique la non conformité d'une question d'audit ou d'une analyse. Il est égalment accompagné d'information complémentaire comme sa gravité ou encore des commentaire associe. Or la création d'écarts à déjà était créer dans la partie audit, et les prélévement ont été construit de sorte a respecter la même interface, le même contract que les audit. Cela rend donc possible la  réutilisation du composant qui nécécittera de refactorer une partie de l'api car cette options devenaient optionnel. 
+
