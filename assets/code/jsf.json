@@ -1,0 +1,15 @@
+{
+        "Type d'activité" : {
+            "Produit" : {
+                "prélèvement": {
+                   ... JSF ...
+                },
+                "analyse": {
+                    "Type d'analyse": {
+                        .... JSF ...
+                    }
+                }
+            }
+        }
+    }
+}

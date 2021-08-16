@@ -50,7 +50,7 @@ Un XRM est un logiciel de gestion des relations tiers. C'est à dire des clients
 Toute la partie audit a était réaliser par mon prédécésseur, il me reste donc à implémenter la parite Analyse et prélévement. 
 
 \subsubsection{Fonctionnalités}
-Tout d'abord passons en revus les fonctionalités souhaité par les clients. Ici nous avons 2 client différents avec des besoins différents.
+Tout d'abord passons en revus les fonctionalités principales souhaité par les clients. Ici nous avons 2 client différents avec des besoins différents.
 \begin{itemize}
     \item En tant que Consortium, je souhaite pouvoir créer des fiches prélevements. En fonction du cahier des charges, type d'activité de la personne audité il est possible d'avoir plusieurs champs différents définis dans un fichier de configuration.
     \item En tant que Consortium, je souhaite pouvoir ajouter des des analyses à un prélévement. Chaque analyse possède un type dépendant des champs sélectionnés dans la fiche prélévement. Ceci conditionera les champs spécifique de l'analyse
@@ -76,14 +76,37 @@ Voila pour l\'existant au niveaux de l\'api. Voyons maintenant comment à était
 
 Premierement commençons par la liste des audits crées. Cette liste comporte 3 composant principaux: 
 \begin{itemize}
-    \item  \textit{AuditSubscriberListGrid}: Les composants suffixer par \textbf{Grid} dans la CRM sont des composant... 
-    % TODO expliquer GridBlock
+    \item  \textit{AuditSubscriberListGrid}: Les composants suffixer par \textbf{Grid} dans la CRM sont des composant paramétrable dans le fichier de configuration d'une CRM. Ces composant integre un composant integre un \textbf{GridBlock} qui permette d'integrer un composant dynamiquement dans l'écrand d'accueil ou encore dans la barre de navigation latéral. Des routes dynaque seront générer à partir de la configuration.
     \item \textit{AuditSubscriberList} : qui va récupérer les données du serveur et les passer au composant enfant avec les en-têtes du tablaux souhaité.  
     \item \textit{AuditSubscriberListSimple} qui va intégré le composant data-table de la librairie Vuetify. 
 \end{itemize}
 
 Afin de rendre ces composants les plus réutilisable possible il a utilisé le système de \textbf{slots}\cite{vueslots} de Vue. Un slot permet de réserver une place à un composant ou autre template html qui sera injecter depuis un composant parent. Un composant parent peu lui même définir qu'un slot enfant comprend un autre slot. Ainsi Cela permet une total personalisation et donc une réutilisation total du composant. 
-
 Les clients souhaitaient pouvoir créer des écarts lorsqu'une analyse est non conforme.
-Un écarts est une sorte de ticket qui explique la non conformité d'une question d'audit ou d'une analyse. Il est égalment accompagné d'information complémentaire comme sa gravité ou encore des commentaire associe. Or la création d'écarts à déjà était créer dans la partie audit, et les prélévement ont été construit de sorte a respecter la même interface, le même contract que les audit. Cela rend donc possible la  réutilisation du composant qui nécécittera de refactorer une partie de l'api car cette options devenaient optionnel. 
+Un écarts est une sorte de ticket qui explique la non conformité d'une question d'audit ou d'une analyse. Il est égalment accompagné d'information complémentaire comme sa gravité ou encore des commentaire associe. Or la création d'écarts à déjà était créer dans la partie audit, et les prélévement ont été construit de sorte a respecter la même interface, le même contract que les audit. Cela rend donc possible la  réutilisation du composant. Ceci nécécittera de refactorer une partie de l'api car certaines options devenaient optionnel, celon le context \textbf{audit} ou \textbf{prélèvement}. Pour plus de précision, voir l'architectecture des recordset\ref{fig:recordset}. On repetera cette architectecture également pour les controlleur.
+
+Nous souhaitons également pouvoir téléverser des fichier lié a nos analyse. Il s'agit d'une Fonctionnalités très utiliser dans la CRM est un composant exite donc déjà. 
+
+\subsubsection{Les formulaires des prélévement}
+
+Afin de nous indiqué leur besoins, le \textit{Consortium} nous a envoyé un fichier excel correspondant a toutes les conditions possible pour les formulaire de prélévement et d'analyse. 
+Une configuration de prélévement dépend de trois grands critères: 
+\begin{itemize}
+    \item Type d'activité
+    \item Cahier des charge
+    \item Le type de produit
+\end{itemize}
+Le type d'activité et le cahier des charges dépendent de l'organisme chez qui on effectue le prélévement. La liste des produits nous a été fournis dans le fichier excel et dépend essentielement du type d'activité et du cahier des charges. Pour contruire facilement des interfaces de formulaire, nous utilisons une librairie nommé \textit{Koumoul}\cite{koumoul}. Koumoul est une implémentation Vue/Vuetify de la norme JSON Schema Form\cite{jsf}. Cette norme permet de facilement construire des formulaire a partir d'un fichier JSON. De nombreuse implémentation existe pour les différent framework javascript, comme React ou Angular. L'un des avantage en plus de la rapidié et la facilité de construction, il est donc réutilisable au travers différent composant d'une applications mais également au travers de plusieurs application quelque soit la technologie utilisé. Koumoul à la particularité d'utilisé la librairie graphique Vuetify qui permet donc d'utiliser les composants de cette librairie.
+
+Pour me faciliter le travail, j'ai donc écrit un script permetant de parser le fichier qu'on nous a mis a disposition afin de le rendre exploitable par notre application. 
+
+Au vue de toute les conditions nécessaire j'ai donc choisi d'architecturer mon fichier à la manière de l'annexe \ref{fig:jsf}. Cette configuration me permet de facilement choisir le schéma souhaité à l'aide des information choisie par l'utilisateur. Il me permet également de facilement proposer les différents produit ou type d'analyse possible celons la configuration choisie.
+
+Après avoir construit cela divers problème lié à la gestion des variable de koumoul sont survenu. Dans vue, une des notions les plus importante est le \textbf{v-model}\cite{vmodel}. Il s'agit d'une variable passer en props par un parents a un composant enfant qui aura la particularité d'être modifiable lors de l'émition de l'évenement input par l'enfant. Or lorsque je souhaiter envoyé le résultat de mon formulaire au serveur celui-ci ne s'était pas mis à jour. La seul solution pour résoudre ce problème de synchronisation est l'appel à la méthode \textit{nextTick}\cite{nextTick} de Vue. Cette méthode permet de différer l'appel d'une fonction au prochain cycle de mise à jour du DOM.
+
+
+Ici je vous présente uniquement le cas du Consortium car il s'agit du plus complexe des deux et les éléments technologique utilisé dans la résolution de celui-ci sont également utilisé lors du développement du cas d'Interporc. En effet, la configuration pour Interporc, est beaucoup plus simple et ne dépend que d'un seul élément. Ceci me force donc à créer un composant spécifique pour le Consortium et un autre pour Interporc car leur composition sont trop différente. Afin d'eviter a nouveaux la redondance de code je créer donc un Mixins pour centraliser la logique comumne. 
+
+\subsubsection{Ajout des écarts}
+Une fois la configuration et les interfaces des formulaire d'analyse/prélèvement effectuer. La prochaine étapes vu d'intégré l'ajout des écarts à une analyse. Ici je n'avais pas de nouveaux composant à créer, mais la difficulté résida dans la compréhension de ce qu'avait fais mon prédécésseur. Cette conpréhension fut d'autant plus compliqué qu'aucune documentation n'était livrer avec ce composant. Les endroits où il réccupérer les données n'était pas claire et cela m'a donc fait prendre du retard sur mon avancer. 
 
