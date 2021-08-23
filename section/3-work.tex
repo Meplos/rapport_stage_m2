@@ -24,23 +24,25 @@ Dès que ces informations sont réccupérées il ne reste plus qu'a établir les
 
 \subsubsection{Compréhension de l'API et implémentation des requêtes}
 
-Dans l'actuel implémentation du serveur Send-Up, la partie gérant les \textit{Recordset} - Table MySQL comportant un champ info destiné à stocker du JSON - est gérer par une partie de l'API dont les routes pointant vers cette partie sont générer automatiquement à partir du nom de la méthode définie dans le controlleur.Exemple la méthode postRecordset est appelée lors d'une requête POST sur /Recordset. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} était accepter pour la requête existante.
-Une requête qui permetter de lister tous les Recordset lié à l'entreprise qui les a créé, Dans notre cas il s'agit de \textit{Send-Up Formation}. Cette requête permet donc de répondre à la demande de vue administrateur. Afin d'avoir une vue "entreprise", on associe chaque utilisateur à  un champs customisé nommé "entreprise" qui correspond au vrai nom de son entreprise. Grâce à cela on à juste a rajouter un paramètre à la requete précédente afin d'avoir une vue réduite sur les données. 
-Pour récuppérer les données d'un seul utilisateur, il nous suffit juste de de filter sur l'id de l'utilisateur.   
+Dans l'implémentation actuelle du serveur Send-Up, la partie gérant les \textit{Recordset} - table MySQL comportant un champ info destiné à stocker du JSON - est gérée par une partie de l'API dont les routes pointant vers cette partie sont générées automatiquement à partir du nom de la méthode définie dans le controlleur. Exemple la méthode \textit{postRecordset} est appelée lors d'une requête POST sur la route \textit{/Recordset}. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} étaient acceptés pour la requête existante.
+Une requête qui permettait de lister tous les Recordset liés à l'entreprise qui les a créer, Dans notre cas il s'agit de \textit{Send-Up Formation}. Cette requête permet donc de répondre à la demande de vue administrateur. Afin d'avoir une vue "entreprise", on associe chaque utilisateur à  un champ customisé nommé "entreprise" qui correspond au vrai nom de son entreprise. Grâce à cela on a juste à rajouter un paramètre à la requête précédente afin d'avoir une vue réduite sur les données. 
+Pour récuppérer les données d'un seul utilisateur, il nous suffit juste de de filtrer sur l'id de l'utilisateur.   
 
 \subsubsection{Création des widgets}
 
-Une fois les données récupérées et les requêtes créées il fallait que je créais 5 widgets différents qui permettait de: 
+Une fois les données récupérées et les requêtes créées il fallait que je créais 5 widgets différents qui permettaient de: 
 \begin{itemize}
     \item visualiser les résultats d'une personne formée pour chaque tentative. 
     \item  visualiser les réponses avec correction d'une personne formée.
-    \item afficher les statistiques globales de la formation c'est a dire le nombre de bonne réponse par rapport au nombre de personnes.
+    \item afficher les statistiques globales de la formation c'est a dire le nombre de bonnes réponses par rapport au nombre de personnes.
     \item afficher les statisques globales pour le formulaire de satisfaction client. 
-    \item afficher les réponses d'une personne formé au questionnaire de satisfaction.  
+    \item afficher les réponses d'une personne formé eau questionnaire de satisfaction.  
 \end{itemize}
 
-Après avoir développer certains d'entre eux, il s'avéra que certains traitements se répéter ou se ressembler fortement. Or VueJS intègre des \textit{Mixins}, ces éléments possède les mêmes caractéristique dans leur balise script qu'un composant vueJS classique. Mais ce dernier à la possibilité d'être intégré à l'intérieure de composant (ou autre Mixins). Chaque composant hérite donc des données, méthodes et autres propriétés calculées. Ceci empêche donc la redondance et facilite la maintenabilité.
-C'est donc pour cela, que j'ai créé un mixins spéciale afin de facilité la lisibilité et la maintenance du code. 
+Après avoir développé certains d'entre eux, il s'est avéré que certains traitements se répéter ou se ressembler fortement. Or VueJS intègre des \textit{Mixins}, ces éléments possèdent les mêmes caractéristiques dans leurs balises script qu'un composant vueJS classique. Mais ce dernier a la possibilité d'être intégré à l'intérieur de composants (ou autre Mixins). Chaque composant hérite donc des données, méthodes et autres propriétés calculées. Ceci empêche donc la redondance et facilite la maintenabilité.
+C'est donc pour cela, que j'ai créé un mixins spécial afin de facilité la lisibilité et la maintenance du code. 
+
+Pour voir les résultats de ces widgets, voir les figures : \ref{fig:statindi}, \ref{fig:statglobal}, \ref{fig:answer}, \ref{fig:satisfaction}, \ref{fig:satisfactionStat}
 
 
 \subsection{Reprise d'un projet XRM}
