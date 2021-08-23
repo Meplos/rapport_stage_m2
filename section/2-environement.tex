@@ -7,7 +7,7 @@ Lors de mon arrivée dans l'entreprise, j'ai dû utiliser les outils internes de
 \subsubsection{Monday}
 
 \textit{Monday}\cite{monday} est un outil de gestion de projet simple qui permet de créer des tableaux et y ajouter des tâches.
-Chaque tâche peut être attribuée à un quelqu'un, elle posséde un état (en cours, terminé, etc.) et une priorité.
+Chaque tâche peut être attribuée à quelqu'un, elle posséde un état (en cours, terminée, etc.) et une priorité.
 De plus chaque tâche possède un espace "discussion" qui permet de faire état de l'avancement ou encore de noter certaines informations importantes. 
 
 \begin{figure}[htbp]
@@ -18,12 +18,12 @@ De plus chaque tâche possède un espace "discussion" qui permet de faire état 
 
 \subsubsection{Google Workspace}
 Afin de faciliter la communication au sein des équipes, l'entreprise utilise Google Workspace pour produire de la documentation (Cahier des charges, etc...), GMail et Google Chat afin d'échanger rapidement, Google Agenda pour planifier les rendez-vous.
-De plus, l'entreprise ayant des clients se trouvant dans toute la France, et tenant compte de la situation sanitaire actuelle l'applications Google Meet est utilisée comme application de visio conférence, pour les diverses réunions et rendez-vous projets . 
+De plus, l'entreprise ayant des clients se trouvant dans toute la France, et en tenant compte de la situation sanitaire actuelle, l'application Google Meet est utilisée comme application de visio conférence, pour les diverses réunions et les rendez-vous avec les clients. 
 
 \subsubsection{Git et GitKraken}
 Git est un logiciel de gestion de version, il permet de créer des projets et de les versionner. Il permet également le partage du code ainsi que le développement sur plusieurs branches, afin de ne pas empiéter sur le travail des autres membres de l'équipe.
 
-\textit{GitKraken}\cite{gitkraken} lui est une interface graphique utilisant git. En effet git s'utilisant principalement par ligne de commande il est parfois difficile à utiliser. GitKraken permet de faciliter l'utilisation de git et permet de tout faire en passant par l'interface (pull, merge, se déplacer entre les branche, etc..).
+\textit{GitKraken}\cite{gitkraken} lui est une interface graphique utilisant git. En effet git s'utilisant principalement par ligne de commande, il est parfois difficile à utiliser. GitKraken permet de faciliter l'utilisation de git et permet de tout faire en passant par l'interface (pull, merge, se déplacer entre les branches, etc..).
 
 \begin{figure}[htbp]
     \center
@@ -31,8 +31,8 @@ Git est un logiciel de gestion de version, il permet de créer des projets et de
     \caption{Interface de  GitKraken}
 \end{figure}
 
-De plus il permet une totale intégration des git flow. C'est à dire créer facilement une branche par nouvelle feature, et simplement merge avec la branche de développement lorsque celle ci est terminée.
-Les git flow permettent également une meilleure gestion des HotFix et des releases mais je ne les ai pas utilisé lors de mon stage. 
+De plus il permet une totale intégration des git flow. C'est à dire créer facilement une branche par nouvelle fonctionalités, et simplement la fusioné avec la branche de développement lorsque celle ci est terminée.
+Les git flow permettent également une meilleure gestion des HotFix, débbogage effectuer en production, et de mise en production mais je ne les ai pas utilisées lors de mon stage. 
 
 \begin{figure}[htbp]
     \center
@@ -43,19 +43,20 @@ Les git flow permettent également une meilleure gestion des HotFix et des relea
 
 \subsubsection{PHPStorm}
 
-\textit{PHPStorm}\cite{PHPStorm} créé par \textit{JETBRAINS}\cite{jetbrains} et l'un des IDE les plus complet pour le développement web.
-A l'aide de ses nombreux pluggins il permet une totale prise en charge des framework comme Symphony et VueJS. Il permet de facilement de refactoriser du code  ou encore de créer de nouveaux snippets afin de faciliter les phases de développement.
-Malgré ses nombreux points positifs, il semble dur à prendre en main au début mais par chance au cours de mes études supérieures j'ai été amené à utiliser InteliJ IDEA, ou encore Android studio qui sont deux IDE de JetBrain qui ont exactement la même structure. 
+\textit{PHPStorm}\cite{phpstorm}, créé par \textit{JETBRAINS}\cite{jetbrains}, est l'un des IDE les plus complet pour le développement web.
+A l'aide de ses nombreux pluggins il permet une totale prise en charge des framework comme Symfony\cite{symfony} et VueJS\cite{vue}. Il permet de facilement de refactoriser du code  ou encore de créer de nouveaux snippets, portions de code paramétrables, afin de faciliter les phases de développement.
+Malgré ses nombreux points positifs, il est dur à prendre en main au début mais par chance au cours de mes études supérieures j'ai été amené à utiliser InteliJ IDEA\cite{idea}, ou encore Android studio\cite{androidstudio} qui sont deux IDE de JetBrain qui ont exactement la même structure. 
 
 \begin{figure}[htbp]
     \center 
-    //TODO: Screen PHPStorm
+    \includegraphics[width=\textwidth]{phpstorm.png}
+    \caption{PHPStorm}
 \end{figure}
 
 
 \subsubsection{Postman}
 
-En ce moment l'entreprise ouvre son API de plus en plus à ses clients afin qu'ils puissent eux même intégrer les différents services de la plateforme. Et c'est pour cette raison que l'API doit devenir de plus en plus robuste. Dans cette optique nous utilisons l'application Postman afin de facilement créer nos requêtes ainsi que des tests associés. L'outil permet de faire hériter des test à des sous collections ce qui nous permet de gagner du temps lorsque certains test sont génériques comme par exemple un temps de réponse inférieure à 200ms ou encore un statut de réponse différent de 500. 
+En ce moment l'entreprise ouvre son API de plus en plus à ses clients afin qu'ils puissent eux même intégrer les différents services de la plateforme. Et c'est pour cette raison que l'API doit devenir de plus en plus robuste. Dans cette optique nous utilisons l'application \textit{Postman}\cite{postman} afin de facilement créer nos requêtes ainsi que des tests associés. L'outil permet de faire hériter des tests à des sous collections ce qui nous permet de gagner du temps lorsque certains tests sont génériques comme par exemple un temps de réponse inférieure à 200ms ou encore un statut de réponse différent de 500. 
 
 \begin{figure}[htbp]
     \center
@@ -63,15 +64,15 @@ En ce moment l'entreprise ouvre son API de plus en plus à ses clients afin qu'i
         \caption{Exemple de test Postman}
 \end{figure}
 
-De plus il intègre un \textit{collection runner}\ref{fig:postman_collectionRunner} qui permet d'agencer l'ordre des requêtes, ainsi que de les lancer $n$ fois, à un intervalle de temps $y$. 
+De plus il intègre un \textit{collection runner} (Figure \ref{fig:postman_collectionRunner}) qui permet d'agencer l'ordre des requêtes, ainsi que de les lancer $n$ fois, à un intervalle de temps $y$. 
 
 
 \subsection{Technologies}
 
-Historiquement la plateforme Send-Up à était développé sur une stack Symphony 2.8/Jquery/Bootstrap. Aujourd'hui l'entreprise est en pleine transition technologique. Son objectif est de se passer de Jquery et Bootstrap au profit des nouvelles technologies du web et plus particulièrement du framework VueJS. Cette transition reste un défi pour l'entreprise car certains outils du site comme le \textit{studio digital} doivent garder la "legacy" afin de garder une rétro-compatibilité mais aussi afin de facilité son usage au prés des clients. Voyons plus en détails les technologies choisies par l'entreprise à savoir Symfony et VueJS.
+Historiquement la plateforme Send-Up à été développée sur une stack Symfony 2.8/Jquery/Bootstrap. Aujourd'hui l'entreprise est en pleine transition technologique. Son objectif est de se passer de Jquery et Bootstrap au profit des nouvelles technologies du web et plus particulièrement du framework VueJS. Cette transition reste un défi pour l'entreprise car certains outils du site comme le \textit{studio digital} doivent garder la "legacy", l'héritage des fonctionalités existante, afin de garder une rétro-compatibilité mais aussi afin de facilité son usage auprès des clients. Voyons plus en détails les technologies choisies par l'entreprise à savoir Symfony et VueJS.
 
 \subsubsection{Symfony}
-Symfony\cite{symfony} est un framework PHP français développée en 2005 par Fabien Potencier. Basé sur le pattern Modèle-Vue-Controller (MVC), il est actuellement en version 5.x.x  Le gros avantage de Symfony sur les autres framework php du même type comme Laravel, ou CakePHP est sa documentation qui en plus d'être riche et également traduite en français. De plus, il possède une communauté très importante et réactive. En effet a ce jour il existe plus de $X$ bundle sur la version 2.8. Et énormément de réponses sur les forums de developpeur. Il intègre également des outils qui sont extrêment pratiques dans la gestion des données comme par exemple \textbf{Doctrine}\cite{doctrine} un ORM (Object Relation Manager).
+Symfony\cite{symfony} est un framework PHP français développée en 2005 par Fabien Potencier. Basé sur le pattern Modèle-Vue-Controller (MVC), il est actuellement en version 5.x.x.  Le gros avantage de Symfony sur les autres framework php du même type comme Laravel, ou CakePHP, est sa documentation qui en plus d'être riche et également traduite en français. De plus, il possède une communauté très importante et réactive. En effet, à ce jour il existe plus de 4 563 bundles. Et énormément de réponses sur les forums de developpeur. Il intègre également des outils qui sont extrêment pratiques dans la gestion des données comme par exemple \textbf{Doctrine}\cite{doctrine} un ORM (Object Relation Manager).
 
 Un ORM permet de facilement gérer les données en transformant directement les résultats des requêtes en Entité php. Il intègre également un langage d'intérrogation de la base de données nommé DQL. Ce langage rend plus permet de rendre plus lisible les requêtes et l'intégration de variable dans celle-ci. D'autre outils sont également présents comme l'injecteur de dépendance ou encore des outils de debug disponnibles en environement de developement.  
 
