@@ -5,21 +5,21 @@ Au cours de mon stage, j'ai pu intervenir sur différents projets allant d'un si
 Lors de mon arrivé dans l'entreprise, \textit{CIRRUSWARE} cherchait à valoriser ses formations en devenant Organisme de formation certifié \textbf{QUALIOPI}. QUALIOPI est une certification qui garantie des formations avec: 
 \begin{itemize}
     \item des bons résultats
-    \item des adaptations au besoins
+    \item des adaptations aux besoins
     \item des formateurs qualifiés
     \item une bonne prise en compte des retours face au formations
 \end{itemize} 
-Afin de correspondre à ces critères, nous avions besoin de construire un site web qui permettrait d'effectuer les questionnaires des différents modules de la formations, ainsi que le formulaire de satisfaction. Puis par la suite de pouvoir consulter les différentes statistiques des différents modules sous 3 vue différentes, formés, qui doit voir uniquement leurs résultats, entreprise qui ne voit que les statistiques de ses employés formés, une vision globale qui permettra de voir toutes les statistiques des personnes formées.
+Afin de correspondre à ces critères, nous avions besoin de construire un site web qui permettrait d'effectuer les questionnaires des différents modules de la formations, ainsi que le formulaire de satisfaction. Puis par la suite de pouvoir consulter les différentes statistiques des différents modules sous 3 vues différentes, formés, qui doit voir uniquement leurs résultats, entreprise qui ne voit que les statistiques de ses employés formés, une vision globale qui permettra de voir toutes les statistiques des personnes formées.
 
-La première étape réalisée afin de pouvoir réaliser ceci à était d'adapter l'enregistrement des formulaires du studio qui jusque là ne nous permet pas d'effectuer simplement des statistiques. 
+La première étape réalisée afin de pouvoir réaliser ceci a été d'adapter l'enregistrement des formulaires du studio qui jusque là ne nous permettaient pas d'effectuer simplement des statistiques. 
 
 \subsubsection{Serializations des données des formulaires}
 
-Afin de récolter les données des formulaire, le studio digital passe par un serializer qui va enregistrer dans un fichier json les valeurs des différents champs associés à leurs id. Ce système présente plusieurs avantage comme la facilité et la rapidité d'implémentation. Maleureusement ceci ne nous permet pas de savoir si une réponse est correcte ou non dans notre cas. Ou encore pouvoir associer le label d'une question à son résultat. 
+Afin de récolter les données des formulaires, le studio digital passe par un serializer,un outil qui permet de passer les données au travers d'un flux. Celui ci va enregistrer dans un objet json les valeurs des différents champs associés à leurs id. Ce système présente plusieurs avantages comme la facilité et la rapidité d'implémentation. Maleureusement ceci ne nous permet pas de savoir si une réponse est correcte ou non dans notre cas. Ou encore pouvoir associer le label d'une question à son résultat. 
 
-Pour atteindre le résultat souhaité, j'ai dû implémenter un nouveau widget pour le studio digital en VueJS. Ce widget est un simple bouton de correction qui va devoir récupérer tout le contenu nécessaire du formulaire et de le stocker dans des champs cachés afin de servir le serializer. Le reste du formulaire étant coder en JQuery/html, la seule solution était donc de parcourir le formulaire et de récupérer les information dans le DOM. A savoir les information permettant le calcule de la note, diverses meta-données par rapport au question comme le label, l'id du champ concerné,le résultat obtenu a la question, etc.. 
+Pour atteindre le résultat souhaité, j'ai dû implémenter un nouveau widget pour le studio digital en VueJS. Ce widget est un simple bouton de correction qui va devoir récupérer tout le contenu nécessaire du formulaire et de le stocker dans des champs cachés afin de servir le serializer. Le reste du formulaire étant coder en JQuery/html, la seule solution était donc de parcourir le formulaire et de récupérer les information directement dans le code html de la page, le DOM\footnote{Document Object Model}.Les informations qui je vais récupérer sont celles, qui permetrons le calcule de la note, diverses meta-données par rapport au question comme le label, l'id du champ concerné,le résultat obtenu a la question, etc.. 
 
-Dès que ces informations fut récupérer il ne rester plus qu'a établir les différentes requêtes nécessaire à la récupération des données en fonction du périmètre défini (formé, entreprise, admin)
+Dès que ces informations sont réccupérées il ne reste plus qu'a établir les différentes requêtes nécessaire à la récupération des données en fonction du périmètre défini (formé, entreprise, admin.)
 
 
 \subsubsection{Compréhension de l'API et implémentation des requêtes}

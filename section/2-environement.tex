@@ -74,11 +74,11 @@ Historiquement la plateforme Send-Up à été développée sur une stack Symfony
 \subsubsection{Symfony}
 Symfony\cite{symfony} est un framework PHP français développée en 2005 par Fabien Potencier. Basé sur le pattern Modèle-Vue-Controller (MVC), il est actuellement en version 5.x.x.  Le gros avantage de Symfony sur les autres framework php du même type comme Laravel, ou CakePHP, est sa documentation qui en plus d'être riche et également traduite en français. De plus, il possède une communauté très importante et réactive. En effet, à ce jour il existe plus de 4 563 bundles. Et énormément de réponses sur les forums de developpeur. Il intègre également des outils qui sont extrêment pratiques dans la gestion des données comme par exemple \textbf{Doctrine}\cite{doctrine} un ORM (Object Relation Manager).
 
-Un ORM permet de facilement gérer les données en transformant directement les résultats des requêtes en Entité php. Il intègre également un langage d'intérrogation de la base de données nommé DQL. Ce langage rend plus permet de rendre plus lisible les requêtes et l'intégration de variable dans celle-ci. D'autre outils sont également présents comme l'injecteur de dépendance ou encore des outils de debug disponnibles en environement de developement.  
+Un ORM permet de facilement gérer les données en transformant directement les résultats des requêtes en entité php. Il intègre également un langage d'intérrogation de la base de données nommé DQL. Ce langage permet de rendre plus lisible les requêtes ainsi que l'utilisation de variables. D'autre outils sont également présents comme l'injecteur de dépendances ou encore des outils de debug disponibles en environement de développement.  
 
 
 \subsubsection{VueJS}
-Pour remplacer la partie Jquery de Send-Up le framework VueJs\cite{vue} a était choisi par l'équipe. Il s'agit d'un framework open-source développer à l'origine par Evan You en 2013. Ce framework facilite la création d'interface graphique et de Single Page Application (SPA). Pour présenter rapidement le framework voici un exemple de composant basique. 
+Pour remplacer la partie Jquery de Send-Up le framework VueJs\cite{vue} a été choisi par l'équipe. Il s'agit d'un framework open-source développer à l'origine par Evan You en 2013. Ce framework facilite la création d'interfaces graphiques et de Single Page Application (SPA). Pour présenter rapidement le framework voici un exemple de composant basique. 
 
 \begin{figure}[htbp]
     \center
@@ -90,13 +90,14 @@ Un fichier .vue est composé de 3 élements principaux.
 \begin{itemize}
     \item \textbf{template} : contient le code HTML de l'interface graphique.
     \item \textbf{script} : contient la logique et le comportement du composant. 
-    \item \textbf{style} : contient les styles CSS du composant. Le style peux être utilisé avec une props \textit{scoped} afin de limiter les styles à l'intérieur du composant.
+    \item \textbf{style} : contient les styles CSS du composant. On peut l'utiliser de deux manière différentes au seins d'un composant. En tant que style générale qui va atteindre le composant et ses enfant, ou en porté restreinte qui ne va atteindre que le composant. 
 \end{itemize}
 
-La balise script est l'endroit ou on va déclarer le composant et tout ce dont il a besoin pour fonctionner. On y retrouve donc les sous composants qu'il utilise dans son rendu, les paramètres (appelé \textit{props}) que son parent peut lui passer, ici on attend un paramètres \textit{msg} de type \textit{String}. On retrouve également l'état du composant avec toutes les données utilisées,un compteur et la chaîne de caractère \textit{hello}, les méthodes qui vont déterminer la logique, les propriétés calculées du composant. Les propriétés calculées sont appelables comme les variables indiquées dans data. Mais ne sont calculées qu'une seule fois à la création du composant puis lors de la modification de variable utilisée à l'intérieur. 
+La balise script est l'endroit où on va déclarer le composant et tout ce dont il a besoin pour fonctionner. On y retrouve donc les sous composants qu'il utilise dans son rendu, les paramètres (appelés \textit{props}) que son parent peut lui passer, ici on attend un paramètre \textit{msg} de type \textit{String}.
+On retrouve également l'état du composant avec toutes les données utilisées. Dans l'exemple ci-dessous, on a un compteur et la chaîne de caractère \textit{hello}, les méthodes qui vont déterminer la logique, les propriétés calculées du composant. Les propriétés calculées peuvent être appelées comme les variables indiquées dans data. Mais ne sont calculées qu'une seule fois à la création du composant puis lors de la modification de variable utilisée à l'intérieur. 
 De plus le framework possède une catégorie d'objet nommé \textit{Mixins} dont on parelera plus en détails plus tard.
 
-Voici le rendu de ce composant appeler avec $msg = Friends$ :
+Voici le rendu de ce composant appelé avec $msg = Friends$ :
 \begin{figure}[htbp]
     \center
     \includegraphics[width=0.8\textwidth]{vue_ui.png}
@@ -104,6 +105,6 @@ Voici le rendu de ce composant appeler avec $msg = Friends$ :
     
 \end{figure}
 
-On y retrouve également les divers événement du cycle de vie au quelle on  peut se brancher pour effectuer certains traitement spécifiques. Pour plus de détails voir l'annexes \ref{fig:vue_cycle}
+On y retrouve également les divers événements du cycle de vie auquel on  peut se brancher pour effectuer certains traitement spécifiques, comme faire des requêtes d'API. Pour plus de détails voir l'annexes \ref{fig:vue_cycle}
 
 
