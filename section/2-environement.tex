@@ -44,7 +44,7 @@ Les git flow permettent également une meilleure gestion des HotFix, débbogage 
 \subsubsection{PHPStorm}
 
 \textit{PHPStorm}\cite{phpstorm}, créé par \textit{JETBRAINS}\cite{jetbrains}, est l'un des IDE les plus complet pour le développement web.
-A l'aide de ses nombreux pluggins il permet une totale prise en charge des framework comme Symfony\cite{symfony} et VueJS\cite{vue}. Il permet de facilement de refactoriser du code  ou encore de créer de nouveaux snippets, portions de code paramétrables, afin de faciliter les phases de développement.
+A l'aide de ses nombreux pluggins il permet une totale prise en charge des framework comme Symfony\cite{symfony} et VueJS\cite{vue}. Il permet de facilement refactoriser du code  ou encore de créer de nouveaux snippets, portions de code paramétrables, afin de faciliter les phases de développement.
 Malgré ses nombreux points positifs, il est dur à prendre en main au début mais par chance au cours de mes études supérieures j'ai été amené à utiliser InteliJ IDEA\cite{idea}, ou encore Android studio\cite{androidstudio} qui sont deux IDE de JetBrain qui ont exactement la même structure. 
 
 \begin{figure}[htbp]
@@ -90,7 +90,7 @@ Un fichier .vue est composé de 3 élements principaux.
 \begin{itemize}
     \item \textbf{template} : contient le code HTML de l'interface graphique.
     \item \textbf{script} : contient la logique et le comportement du composant. 
-    \item \textbf{style} : contient les styles CSS du composant. On peut l'utiliser de deux manière différentes au seins d'un composant. En tant que style générale qui va atteindre le composant et ses enfant, ou en porté restreinte qui ne va atteindre que le composant. 
+    \item \textbf{style} : contient les styles CSS du composant. On peut l'utiliser de deux manière différentes au seins d'un composant. En tant que style générale qui va atteindre le composant et ses enfants, ou en porté restreinte qui ne va atteindre que le composant. 
 \end{itemize}
 
 La balise script est l'endroit où on va déclarer le composant et tout ce dont il a besoin pour fonctionner. On y retrouve donc les sous composants qu'il utilise dans son rendu, les paramètres (appelés \textit{props}) que son parent peut lui passer, ici on attend un paramètre \textit{msg} de type \textit{String}.
@@ -101,10 +101,10 @@ Voici le rendu de ce composant appelé avec $msg = Friends$ :
 \begin{figure}[htbp]
     \center
     \includegraphics[width=0.8\textwidth]{vue_ui.png}
+    \label{fig:vue_ui}
     \caption{Exemple de composant}
-    
 \end{figure}
 
-On y retrouve également les divers événements du cycle de vie auquel on  peut se brancher pour effectuer certains traitement spécifiques, comme faire des requêtes d'API. Pour plus de détails voir l'annexes \ref{fig:vue_cycle}
+On y retrouve également les divers événements du cycle de vie auquel on  peut se brancher pour effectuer certains traitement spécifiques, comme faire des requêtes d'API. Pour plus de détails voir la figure \ref{fig:vue_cycle}
 
 

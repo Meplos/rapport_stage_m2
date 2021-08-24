@@ -9,24 +9,24 @@ Lors de mon arrivé dans l'entreprise, \textit{CIRRUSWARE} cherchait à valorise
     \item des formateurs qualifiés
     \item une bonne prise en compte des retours face au formations
 \end{itemize} 
-Afin de correspondre à ces critères, nous avions besoin de construire un site web qui permettrait d'effectuer les questionnaires des différents modules de la formations, ainsi que le formulaire de satisfaction. Puis par la suite de pouvoir consulter les différentes statistiques des différents modules sous 3 vues différentes, formés, qui doit voir uniquement leurs résultats, entreprise qui ne voit que les statistiques de ses employés formés, une vision globale qui permettra de voir toutes les statistiques des personnes formées.
+Afin de correspondre à ces critères, nous avions besoin de construire un site web qui permettrait d'effectuer les questionnaires des différents modules de la formation, ainsi que le formulaire de satisfaction. Puis par la suite de pouvoir consulter les différentes statistiques des différents modules sous 3 vues différentes, formés, qui doit voir uniquement leurs résultats, entreprise qui ne voit que les statistiques de ses employés formés, une vision globale qui permettra de voir toutes les statistiques des personnes formées.
 
 La première étape réalisée afin de pouvoir réaliser ceci a été d'adapter l'enregistrement des formulaires du studio qui jusque là ne nous permettaient pas d'effectuer simplement des statistiques. 
 
 \subsubsection{Serializations des données des formulaires}
 
-Afin de récolter les données des formulaires, le studio digital passe par un serializer,un outil qui permet de passer les données au travers d'un flux. Celui ci va enregistrer dans un objet json les valeurs des différents champs associés à leurs id. Ce système présente plusieurs avantages comme la facilité et la rapidité d'implémentation. Maleureusement ceci ne nous permet pas de savoir si une réponse est correcte ou non dans notre cas. Ou encore pouvoir associer le label d'une question à son résultat. 
+Afin de récolter les données des formulaires, le studio digital passe par un serializer,un outil qui permet de passer les données au travers d'un flux. Celui-ci va enregistrer dans un objet json les valeurs des différents champs associés à leurs id. Ce système présente plusieurs avantages comme la facilité et la rapidité d'implémentation. Maleureusement ceci ne nous permet pas de savoir si une réponse est correcte ou non dans notre cas. Ou encore pouvoir associer le label d'une question à son résultat. 
 
-Pour atteindre le résultat souhaité, j'ai dû implémenter un nouveau widget pour le studio digital en VueJS. Ce widget est un simple bouton de correction qui va devoir récupérer tout le contenu nécessaire du formulaire et de le stocker dans des champs cachés afin de servir le serializer. Le reste du formulaire étant coder en JQuery/html, la seule solution était donc de parcourir le formulaire et de récupérer les information directement dans le code html de la page, le DOM\footnote{Document Object Model}.Les informations qui je vais récupérer sont celles, qui permetrons le calcule de la note, diverses meta-données par rapport au question comme le label, l'id du champ concerné,le résultat obtenu a la question, etc.. 
+Pour atteindre le résultat souhaité, j'ai dû implémenter un nouveau widget pour le studio digital en VueJS. Ce widget est un simple bouton de correction qui va devoir récupérer tout le contenu nécessaire du formulaire et de le stocker dans des champs cachés afin de servir le serializer. Le reste du formulaire étant coder en JQuery/html, la seule solution était donc de parcourir le formulaire et de récupérer les informations directement dans le code html de la page, le DOM\footnote{Document Object Model}.Les informations qui je vais récupérer sont celles, qui permetront le calcul de la note, diverses meta-données par rapport au question comme le label, l'id du champ concerné,le résultat obtenu a la question, etc.. 
 
-Dès que ces informations sont réccupérées il ne reste plus qu'a établir les différentes requêtes nécessaire à la récupération des données en fonction du périmètre défini (formé, entreprise, admin.)
+Dès que ces informations sont réccupérée il ne reste plus qu'à établir les différentes requêtes nécessaire à la récupération des données en fonction du périmètre défini (formé, entreprise, admin.)
 
 
 \subsubsection{Compréhension de l'API et implémentation des requêtes}
 
 Dans l'implémentation actuelle du serveur Send-Up, la partie gérant les \textit{Recordset} - table MySQL comportant un champ info destiné à stocker du JSON - est gérée par une partie de l'API dont les routes pointant vers cette partie sont générées automatiquement à partir du nom de la méthode définie dans le controlleur. Exemple la méthode \textit{postRecordset} est appelée lors d'une requête POST sur la route \textit{/Recordset}. De plus l'une des complications a été de comprendre le format des données à envoyer dans la requête. En cherchant plus profondément dans le code je me suis rendu compte que seuls les \textbf{FormData} étaient acceptés pour la requête existante.
-Une requête qui permettait de lister tous les Recordset liés à l'entreprise qui les a créer, Dans notre cas il s'agit de \textit{Send-Up Formation}. Cette requête permet donc de répondre à la demande de vue administrateur. Afin d'avoir une vue "entreprise", on associe chaque utilisateur à  un champ customisé nommé "entreprise" qui correspond au vrai nom de son entreprise. Grâce à cela on a juste à rajouter un paramètre à la requête précédente afin d'avoir une vue réduite sur les données. 
-Pour récuppérer les données d'un seul utilisateur, il nous suffit juste de de filtrer sur l'id de l'utilisateur.   
+Une requête qui permettait de lister tous les Recordset liés à l'entreprise qui les a créer, dans notre cas il s'agit de \textit{Send-Up Formation}. Cette requête permet donc de répondre à la demande de vue administrateur. Afin d'avoir une vue "entreprise", on associe chaque utilisateur à  un champ customisé nommé "entreprise" qui correspond au vrai nom de son entreprise. Grâce à cela on a juste à rajouter un paramètre à la requête précédente afin d'avoir une vue réduite sur les données. 
+Pour récupérer les données d'un seul utilisateur, il nous suffit juste de filtrer sur l'id de l'utilisateur.   
 
 \subsubsection{Création des widgets}
 
@@ -34,30 +34,30 @@ Une fois les données récupérées et les requêtes créées il fallait que je 
 \begin{itemize}
     \item visualiser les résultats d'une personne formée pour chaque tentative. 
     \item  visualiser les réponses avec correction d'une personne formée.
-    \item afficher les statistiques globales de la formation c'est a dire le nombre de bonnes réponses par rapport au nombre de personnes.
+    \item afficher les statistiques globales de la formation c'est-à-dire le nombre de bonnes réponses par rapport au nombre de personnes.
     \item afficher les statisques globales pour le formulaire de satisfaction client. 
-    \item afficher les réponses d'une personne formé eau questionnaire de satisfaction.  
+    \item afficher les réponses d'une personne formé au questionnaire de satisfaction.  
 \end{itemize}
 
-Après avoir développé certains d'entre eux, il s'est avéré que certains traitements se répéter ou se ressembler fortement. Or VueJS intègre des \textit{Mixins}, ces éléments possèdent les mêmes caractéristiques dans leurs balises script qu'un composant vueJS classique. Mais ce dernier a la possibilité d'être intégré à l'intérieur de composants (ou autre Mixins). Chaque composant hérite donc des données, méthodes et autres propriétés calculées. Ceci empêche donc la redondance et facilite la maintenabilité.
+Après avoir développé certains d'entre eux, il s'est avéré que certains traitements se répéter ou se ressembler fortement. Or VueJS intègre des \textit{Mixins}, ces éléments possèdent les mêmes caractéristiques dans leurs balises script qu'un composant vueJS classique. Mais ce dernier à la possibilité d'être intégré à l'intérieur de composants (ou autre Mixins). Chaque composant hérite donc des données, méthodes et autres propriétés calculées. Ceci empêche donc la redondance et facilite la maintenabilité.
 C'est donc pour cela, que j'ai créé un mixins spécial afin de facilité la lisibilité et la maintenance du code. 
 
-Pour voir les résultats de ces widgets, voir les figures : \ref{fig:statindi}, \ref{fig:statglobal}, \ref{fig:answer}, \ref{fig:satisfaction}, \ref{fig:satisfactionStat}
+Pour voir les résultats de ces widgets, voir les figures :           \ref{fig:statindi}, \ref{fig:statglobal}, \ref{fig:answer}, \ref{fig:satisfaction}, \ref{fig:satisfactionStat}.
 
 
 \subsection{Reprise d'un projet XRM}
-Suite au départ d'un développeur de l'équipe. On m'a placer sur la reprise de son projet qui consite a creer un XRM permetant tous les points de contrôle concernant le \textit{Consortium du Jambon de Bayonne} et \textit{Interporc Franche-Compté}.
-Un XRM est un logiciel de gestion des relations tiers. C'est à dire des clients, fournisseur, revendeur etc... En plus de réaliser ceci le notre doit permettre de pouvoir de créer et de réaliser des audits, en fonction du type d'activité et du cahier des charges de la personne audité, et de pouvoir saisir les données issue d'analyse laboratoire.
+Suite au départ d'un développeur de l'équipe, on m'a placé sur la reprise de son projet qui consite à créer un XRM permetant tous les points de contrôle concernant le \textit{Consortium du Jambon de Bayonne} et \textit{Interporc Franche-Compté}.
+Un XRM est un logiciel de gestion des relations tierces. C'est-à-dire des clients, fournisseurs, revendeurs etc... En plus de réaliser ceci le notre doit permettre de pouvoir créer et réaliser des audits, en fonction du type d'activités et du cahier des charges de la personne audité, et de pouvoir saisir les données issues d'analyse laboratoire.
 
-Toute la partie audit a était réaliser par mon prédécésseur, il me reste donc à implémenter la parite Analyse et prélévement. 
+Toute la partie audit a été réalisé par mon prédécésseur, il me reste donc à implémenter la parite Analyse et prélévement. 
 
 \subsubsection{Fonctionnalités}
-Tout d'abord passons en revus les fonctionalités principales souhaité par les clients. Ici nous avons 2 client différents avec des besoins différents.
+Tout d'abord passons en revue les fonctionalités principales souhaitées par les clients. Ici nous avons 2 clients différents avec des besoins différents.
 \begin{itemize}
-    \item En tant que Consortium, je souhaite pouvoir créer des fiches prélevements. En fonction du cahier des charges, type d'activité de la personne audité il est possible d'avoir plusieurs champs différents définis dans un fichier de configuration.
-    \item En tant que Consortium, je souhaite pouvoir ajouter des des analyses à un prélévement. Chaque analyse possède un type dépendant des champs sélectionnés dans la fiche prélévement. Ceci conditionera les champs spécifique de l'analyse
-    \item En tant que qu'Interporc, je souhaite pouvoir créer des fiches analyse. Les champs spécifiques dépendent uniquement du type de produit sélectionner: Saucisse, Lisier, Lactoserum, Sel. 
-    \item En tant qu'Interporc et Consortium, je souhaite pouvoir lever des écarts à chaques analyses si besoin est.  
+    \item En tant que Consortium, je souhaite pouvoir créer des fiches prélèvements. En fonction du cahier des charges, type d'activité de la personne audité il est possible d'avoir plusieurs champs différents définis dans un fichier de configuration. Ces fiches ont pour but de pouvoir envoyer un courrier au laboratoire puis ensuite d'entrer les données dans le système.
+    \item En tant que Consortium, je souhaite pouvoir ajouter des analyses à un prélévement. Chaque analyse possède un type dépendant des champs sélectionnés dans la fiche prélévement. Ceci conditionera les champs spécifiques de l'analyse
+    \item En tant qu'Interporc, je souhaite pouvoir créer des fiches d'analyses. Les champs spécifiques dépendent uniquement du type de produit sélectionné: Saucisse, Lisier, Lactoserum, Sel. 
+    \item En tant qu'Interporc et Consortium, je souhaite pouvoir lever des écarts sur chaque analyse si besoin est.  
     \item En tant qu'Interporc et Consortium, je souhaite pouvoir téléverser les résultats des laboratoires et les associé à une analyse. 
 \end{itemize}
 
@@ -66,51 +66,54 @@ Tout d'abord passons en revus les fonctionalités principales souhaité par les 
 \subsubsection{Analyse de l'existant}
 
 
-Après avoir discuter avec mon chef des projet, et mon maitre de stage, on a determiner qu'un audit et un prélévement se ressembler énormément. En effet chacun et relier à un auditeur/préleveur, une personne audité, un ou plusieurs cahier des charges et un ou plusieurs type d'activités. 
+Après avoir discuter avec mon chef de projet, et mon maitre de stage, on a determiné qu'un audit et un prélévement se ressemblent énormément. En effet chacun et relié à un auditeur/préleveur, une personne auditée, un ou plusieurs cahier des charges et un ou plusieurs type d'activités. 
 
-Pour cela les audits sont stocké dans une table nommé \textit{Recordset\_app}.Cette classe possède un champ info au format JSON, comme la classe \textit{Recordset}  décrit précédement. La grande différence est que cette dernière est gérér par une classe abstraite nommé \textit{AbstractSheet}, qui définis que le champs info possède au minimum un un champ builder, data et files. Chaque entité voulant être stocker dans la table Recorset\_app doit étre hérité de cette classe et donc respecter ce schéma. Pour différencier nos sous classe nous faisont appel une fonction de doctrine appelée le discriminant. Il permet d'associé un entier a une classe. A ce jour nous avons 2 classe héritant de AbstracSheet: 
+Pour cela les audits sont stockés dans une table nommée \textit{Recordset\_app}. Cette classe possède un champ info au format JSON, comme la classe \textit{Recordset}  décrit précédement. La grande différence est que cette dernière est gérée par une classe abstraite nommé \textit{AbstractSheet}, qui définit que le champ \textit{info} possède au minimum un champ builder, data et files. Chaque entité voulant être stockée dans la table Recorset\_app doit être héritée de cette classe et donc respecter ce schéma. Pour différencier nos sous classe nous faisons appel à une fonction de doctrine appelée le discriminant. Il permet d'associer un entier à une classe. A ce jour nous avons 2 classes héritant de AbstracSheet: 
 \begin{enumerate}
-    \item \textit{Recordset\_app} : qui correspond à toute les fiches standard. 
-    \item \textit{SubscriberAudit}: qui correspond au audit créer par nos subscriber. 
+    \item \textit{Recordset\_app} : qui correspond à toute les fiches standards. 
+    \item \textit{SubscriberAudit}: qui correspond à l'audit créé par nos abonnés. 
 \end{enumerate}
 
-Voila pour l\'existant au niveaux de l\'api. Voyons maintenant comment à était construit les audit côtés interface utilisateur afin de pouvoir garder une cohérence dans l'application et de pouvoir réutiliser au maximum les composants déjà créer. 
+Voila pour l'éxistant au niveaux de l'api. Voyons maintenant comment a été construit les audits du côtés de l'interface utilisateur afin de pouvoir garder une cohérence dans l'application et de pouvoir réutiliser au maximum les composants déjà créer. 
 
-Premierement commençons par la liste des audits crées. Cette liste comporte 3 composant principaux: 
+Premierement commençons par la liste des audits créés. Cette liste comporte 3 composants principaux: 
 \begin{itemize}
-    \item  \textit{AuditSubscriberListGrid}: Les composants suffixer par \textbf{Grid} dans la CRM sont des composant paramétrable dans le fichier de configuration d'une CRM. Ces composant integre un composant integre un \textbf{GridBlock} qui permette d'integrer un composant dynamiquement dans l'écrand d'accueil ou encore dans la barre de navigation latéral. Des routes dynaque seront générer à partir de la configuration.
-    \item \textit{AuditSubscriberList} : qui va récupérer les données du serveur et les passer au composant enfant avec les en-têtes du tablaux souhaité.  
-    \item \textit{AuditSubscriberListSimple} qui va intégré le composant data-table de la librairie Vuetify. 
+    \item  \textit{AuditSubscriberListGrid}: Les composants suffixés par \textbf{Grid} dans le XRM sont des composant paramétrable dans le fichier de configuration d'une CRM. Ces composants integre un  \textbf{GridBlock} qui permet d'integrer un composant dynamiquement dans l'écran d'accueil ou encore dans la barre de navigation latérale. Des routes dynamique seront générées à partir de la configuration.
+    \item \textit{AuditSubscriberList} : qui va récupérer les données du serveur et les passer au composant enfant avec les en-têtes du tableau souhaité.  
+    \item \textit{AuditSubscriberListSimple} qui va intégrer le composant data-table de la librairie Vuetify\cite{vuetify}, une librairie de composant graphique Vue, implémentant les normes du \textit{Material Design}\cite{material}.
 \end{itemize}
 
-Afin de rendre ces composants les plus réutilisable possible il a utilisé le système de \textbf{slots}\cite{vueslots} de Vue. Un slot permet de réserver une place à un composant ou autre template html qui sera injecter depuis un composant parent. Un composant parent peu lui même définir qu'un slot enfant comprend un autre slot. Ainsi Cela permet une total personalisation et donc une réutilisation total du composant. 
+Afin de rendre ces composants le plus réutilisable possible, l'ancien developpeur a utilisé le système de \textbf{slots}\cite{vueslots} de Vue. Un slot permet de réserver une place à un composant ou autre template html qui sera injecté depuis un composant parent. Un composant parent peu lui même définir qu'un slot enfant comprend un autre slot. Ainsi Cela permet une total personalisation et donc une réutilisation totale du composant. 
 Les clients souhaitaient pouvoir créer des écarts lorsqu'une analyse est non conforme.
-Un écarts est une sorte de ticket qui explique la non conformité d'une question d'audit ou d'une analyse. Il est égalment accompagné d'information complémentaire comme sa gravité ou encore des commentaire associe. Or la création d'écarts à déjà était créer dans la partie audit, et les prélévement ont été construit de sorte a respecter la même interface, le même contract que les audit. Cela rend donc possible la  réutilisation du composant. Ceci nécécittera de refactorer une partie de l'api car certaines options devenaient optionnel, celon le context \textbf{audit} ou \textbf{prélèvement}. Pour plus de précision, voir l'architectecture des recordset\ref{fig:recordset}. On repetera cette architectecture également pour les controlleur.
+Un écart est une sorte de ticket qui explique la non conformité d'une question d'audit ou d'une analyse. Il est égalment accompagné d'informations complémentaires comme sa gravité ou encore des commentaires associés. Or la création d'écarts à déjà été créée dans la partie audit, et les prélévements ont été construits de sorte à respecter la même interface, le même contract que les audit. Cela rend donc possible la  réutilisation du composant. Ceci nécessitera de refactor une partie de l'api car certaines options devenaient optionnelles, selon le contexte \textbf{audit} ou \textbf{prélèvement}. Pour plus de précision, voir l'architectecture des recordset\ref{fig:recordset}. On répètera cette architectecture également pour les contrôlleurs.
 
-Nous souhaitons également pouvoir téléverser des fichier lié a nos analyse. Il s'agit d'une Fonctionnalités très utiliser dans la CRM est un composant exite donc déjà. 
+Nous souhaitons également pouvoir téléverser des fichier liés a nos analyses. Il s'agit d'une fonctionnalités très utilisée dans le XRM , c'est un composant qui exite donc déjà. 
 
-\subsubsection{Les formulaires des prélévement}
+\subsubsection{Les formulaires des prélèvements}
 
-Afin de nous indiqué leur besoins, le \textit{Consortium} nous a envoyé un fichier excel correspondant a toutes les conditions possible pour les formulaire de prélévement et d'analyse. 
+Afin de nous indiqués leurs besoins, le \textit{Consortium} nous a envoyé un fichier excel correspondant a toutes les conditions possibles pour les formulaires de prélévement et d'analyse. 
 Une configuration de prélévement dépend de trois grands critères: 
 \begin{itemize}
     \item Type d'activité
-    \item Cahier des charge
+    \item Cahier des charges
     \item Le type de produit
 \end{itemize}
-Le type d'activité et le cahier des charges dépendent de l'organisme chez qui on effectue le prélévement. La liste des produits nous a été fournis dans le fichier excel et dépend essentielement du type d'activité et du cahier des charges. Pour contruire facilement des interfaces de formulaire, nous utilisons une librairie nommé \textit{Koumoul}\cite{koumoul}. Koumoul est une implémentation Vue/Vuetify de la norme JSON Schema Form\cite{jsf}. Cette norme permet de facilement construire des formulaire a partir d'un fichier JSON. De nombreuse implémentation existe pour les différent framework javascript, comme React ou Angular. L'un des avantage en plus de la rapidié et la facilité de construction, il est donc réutilisable au travers différent composant d'une applications mais également au travers de plusieurs application quelque soit la technologie utilisé. Koumoul à la particularité d'utilisé la librairie graphique Vuetify qui permet donc d'utiliser les composants de cette librairie.
+Le type d'activité et le cahier des charges dépendent de l'organisme chez qui on effectue le prélévement. La liste des produits nous a été fournis dans le fichier excel et dépend essentielement du type d'activité et du cahier des charges. Pour construire facilement des interfaces de formulaire, nous utilisons une librairie nommée \textit{Koumoul}\cite{koumoul}. Koumoul est une implémentation Vue/Vuetify de la norme JSON Schema Form\cite{jsf}. Cette norme permet de facilement construire des formulaire a partir d'un fichier JSON. De nombreuses implémentations existes pour les différents framework javascript, comme React\cite{react} ou Angular\cite{angular}. L'un des avantages en plus de la rapidié et la facilité de construction, il est donc réutilisable au travers différent composant d'une application mais également au travers de plusieurs applications quelque soit la technologie utilisé. Koumoul à la particularité d'utilisé la librairie graphique Vuetify qui permet donc d'utiliser les composants et le design des formulaire de cette librairie.
 
-Pour me faciliter le travail, j'ai donc écrit un script permetant de parser le fichier qu'on nous a mis a disposition afin de le rendre exploitable par notre application. 
+Pour me faciliter le travail, j'ai donc écrit un script permetant de parser le fichier qu'on nous à mis a disposition afin de le rendre exploitable par notre application. 
 
-Au vue de toute les conditions nécessaire j'ai donc choisi d'architecturer mon fichier à la manière de l'annexe \ref{fig:jsf}. Cette configuration me permet de facilement choisir le schéma souhaité à l'aide des information choisie par l'utilisateur. Il me permet également de facilement proposer les différents produit ou type d'analyse possible celons la configuration choisie.
+Etant donné toutes les conditions nécessaires j'ai donc choisi d'architecturer mon fichier à la manière de l'annexe \ref{fig:jsf}. Cette configuration me permet de facilement choisir le schéma souhaité à l'aide des informations choisies par l'utilisateur. Il me permet également de facilement proposer les différents produits ou types d'analyse possible selon la configuration choisie.
 
-Après avoir construit cela divers problème lié à la gestion des variable de koumoul sont survenu. Dans vue, une des notions les plus importante est le \textbf{v-model}\cite{vmodel}. Il s'agit d'une variable passer en props par un parents a un composant enfant qui aura la particularité d'être modifiable lors de l'émition de l'évenement input par l'enfant. Or lorsque je souhaiter envoyé le résultat de mon formulaire au serveur celui-ci ne s'était pas mis à jour. La seul solution pour résoudre ce problème de synchronisation est l'appel à la méthode \textit{nextTick}\cite{nextTick} de Vue. Cette méthode permet de différer l'appel d'une fonction au prochain cycle de mise à jour du DOM.
+Après avoir construit cela divers problèmes liés à la gestion des variables de koumoul sont survenus. Dans Vue, une des notions les plus importantes est le \textbf{v-model}\cite{vmodel}. Il s'agit d'une variable passées en props par un parent à un composant enfant qui aura la particularité d'être modifiable lors de l'émition de l'évenement input par l'enfant. Or lorsque je souhaitais envoyer le résultat de mon formulaire au serveur celui-ci ne s'était pas mis à jour. La seule solution pour résoudre ce problème de synchronisation est l'appel à la méthode \textit{nextTick}\cite{nextTick} de Vue. Cette méthode permet de différer l'appel d'une fonction au prochain cycle de mise à jour du DOM.
 
 
-Ici je vous présente uniquement le cas du Consortium car il s'agit du plus complexe des deux et les éléments technologique utilisé dans la résolution de celui-ci sont également utilisé lors du développement du cas d'Interporc. En effet, la configuration pour Interporc, est beaucoup plus simple et ne dépend que d'un seul élément. Ceci me force donc à créer un composant spécifique pour le Consortium et un autre pour Interporc car leur composition sont trop différente. Afin d'eviter a nouveaux la redondance de code je créer donc un Mixins pour centraliser la logique comumne. 
+Ici je vous présente uniquement le cas du Consortium car il s'agit du plus complexe des deux et les éléments technologiques utilisés dans la résolution de celui-ci sont également utilisés lors du développement du cas d'Interporc. En effet, la configuration pour Interporc, est beaucoup plus simple et ne dépend que d'un seul élément. Ceci me force donc à créer un composant spécifique pour le Consortium et un autre pour Interporc car leur composition sont trop différentes. Afin d'éviter à nouveau la redondance de code j'ai créé donc un Mixins pour centraliser la logique comumne. 
 
 \subsubsection{Ajout des écarts}
-Une fois la configuration et les interfaces des formulaire d'analyse/prélèvement effectuer. La prochaine étapes vu d'intégré l'ajout des écarts à une analyse. Ici je n'avais pas de nouveaux composant à créer, mais la difficulté résida dans la compréhension de ce qu'avait fais mon prédécésseur. Cette conpréhension fut d'autant plus compliqué qu'aucune documentation n'était livrer avec ce composant. Les endroits où il réccupérer les données n'était pas claire et cela m'a donc fait prendre du retard sur mon avancer. 
+Une fois la configuration et les interfaces des formulaire d'analyse/prélèvement effectuer.
+La prochaine étapes a été d'intégré l'ajout des écarts à une analyse. Ici je n'avais pas de nouveau composant à créer, mais la difficulté résida dans la compréhension de ce qu'avait fais mon prédécésseur. Cette compréhension était d'autant plus compliquée qu'aucune documentation n'était livrer avec ce composant. Les endroits où les données était réccupéré n'était pas claire et cela m'a donc fait prendre du retard sur mon avancée. 
 
 \subsubsection{Reste à faire}
-A leur actuel cette partie est en train d'être tester par les clients qui devraient faire leur retour sous peu. Il manque malgré cela quelques fonctionalités comme l'export dans un fichier csv. de toutes les analyses, en laissant la possibilité de filtrer sur certain critères. Au niveaux globale de la CRM le projet devrait se poursuivre jusqu'en décembre car il reste encore 2 grandes parties communes au clients et plusieurs petites fonctionalités spécifique à developper.  
+A l'heure actuelle cette partie est en train d'être testée par les clients qui devraient faire leur retour sous peu. Il manque malgré cela quelques fonctionalités comme l'export dans un fichier csv de toutes les analyses, en laissant la possibilité de filtrer sur certains critères. Au niveau global du XRM le projet devrait se poursuivre jusqu'en décembre car il reste encore 2 grandes parties communes aux clients et plusieurs petites fonctionalités spécifiques à developper.  
+
+Les écrans réaliser pour le Consortium se trouvent dans les annexes:  \ref{fig:porcList} \ref{fig:porcCreate}, \ref{fig:porcUpdate}, \ref{fig:porcEcart}.
